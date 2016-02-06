@@ -22,6 +22,7 @@ and is available at http://www.eclipse.org/legal/epl-v10.html
   <feature name='odl-netconf-odl-sample' version='${project.version}' description='OpenDaylight :: netconf-odl-sample'>
     <feature version='${mdsal.version}'>odl-mdsal-broker</feature>
     <feature version='${project.version}'>odl-netconf-odl-sample-api</feature>
+    <bundle>mvn:org.jetbrains.kotlin/kotlin-osgi-bundle/{{VERSION}}</bundle>
     <bundle>mvn:org.mars.kotlin/netconf-odl-sample-impl/{{VERSION}}</bundle>
     <configfile finalname="${configfile.directory}/netconf-odl-sample.xml">mvn:org.mars.kotlin/netconf-odl-sample-impl/{{VERSION}}/xml/config</configfile>
   </feature>

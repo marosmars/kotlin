@@ -1,6 +1,6 @@
 package org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.netconf.odl.sample.impl.rev141210;
 
-import org.mars.kotlin.impl.NetconfSampleProvider;
+import mars.kotlin.impl.NetconfSampleProvider;
 
 public class NetconfSampleModule extends
         org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.netconf.odl.sample.impl.rev141210.AbstractNetconfSampleModule {
