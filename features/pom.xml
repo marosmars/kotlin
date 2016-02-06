@@ -28,6 +28,7 @@ and is available at http://www.eclipse.org/legal/epl-v10.html INTERNAL
     <yangtools.version>0.8.0-SNAPSHOT</yangtools.version>
     <dlux.version>0.3.0-SNAPSHOT</dlux.version>
     <configfile.directory>etc/opendaylight/karaf</configfile.directory>
+    <netconf.version>1.0.0-SNAPSHOT</netconf.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -67,6 +68,22 @@ and is available at http://www.eclipse.org/legal/epl-v10.html INTERNAL
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-osgi-bundle</artifactId>
       <version>1.0.0-rc-1036</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.netconf</groupId>
+      <artifactId>features-netconf-connector</artifactId>
+      <classifier>features</classifier>
+      <version>${netconf.version}</version>
+      <type>xml</type>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.netconf</groupId>
+      <artifactId>features-netconf</artifactId>
+      <classifier>features</classifier>
+      <version>${netconf.version}</version>
+      <type>xml</type>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.mdsal.model</groupId>

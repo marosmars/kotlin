@@ -36,6 +36,11 @@ and is available at http://www.eclipse.org/legal/epl-v10.html
             <artifactId>kotlin-osgi-bundle</artifactId>
             <version>1.0.0-rc-1036</version>
         </dependency>
+        <dependency>
+            <groupId>org.opendaylight.netconf</groupId>
+            <artifactId>sal-netconf-connector</artifactId>
+            <version>${mdsal.version}</version>
+        </dependency>
 
         <!-- Testing Dependencies -->
         <dependency>
