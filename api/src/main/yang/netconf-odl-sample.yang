@@ -1,0 +1,9 @@
+module netconf-odl-sample {
+    yang-version 1;
+    namespace "urn:opendaylight:params:xml:ns:yang:netconf-odl-sample";
+    prefix "netconf-odl-sample";
+
+    revision "2015-01-05" {
+        description "Initial revision of netconf-odl-sample model";
+    }
+}
