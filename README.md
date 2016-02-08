@@ -9,6 +9,12 @@ Final app can be found on [github](https://github.com/marosmars/kotlin). Each st
 
 ## Preparations
 
+### Dependencies
+* Java 8 - Oracle or Openjdk
+* Maven - version 3.2.5 +
+
+### Empty ODL app
+
 Generate app with [ODL archetype](https://wiki.opendaylight.org/view/OpenDaylight_Controller:MD-SAL:Startup_Project_Archetype).
 
 Using 1.1.0-SNAPSHOT version which in translation is Beryllium snapshot version. However this close to formal ODL 
@@ -53,6 +59,12 @@ After another build, start app and in the logs look for:
 `2016-02-06 14:59:48,776 | INFO  | sing-executor-11 | NetconfDevice                    | 157 - org.opendaylight.netconf.sal-netconf-connector - 1.3.0.SNAPSHOT | RemoteDevice{controller-config}: Netconf connector initialized successfully`
 
 Now kotlin is working as well as ODL NETCONF features.
+
+## Trying out kotlin's features
+
+Now, kotlin can be utilized to [full extent](https://github.com/marosmars/kotlin/commit/e84329e671d7c7c5568ffb53a9ea1fe0a43f404d).
+
+// TODO
 
 ## Unit tests
 *** TODO [Spock](https://code.google.com/archive/p/spock/) tests

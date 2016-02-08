@@ -16,32 +16,44 @@ import org.slf4j.LoggerFactory
 class NetconfSampleProvider : BindingAwareProvider, AutoCloseable, DataTreeChangeListener<Node> {
 
     companion object {
+        private val LOG = LoggerFactory.getLogger(NetconfSampleProvider::class.java)
         val NETCONF_TOPO_IID: InstanceIdentifier<Topology> = InstanceIdentifier.create(NetworkTopology::class.java)
                 .child(Topology::class.java, TopologyKey(TopologyId(TopologyNetconf.QNAME.localName)));
     }
 
-    private val LOG = LoggerFactory.getLogger(NetconfSampleProvider::class.java)
 
     private var mountPointService: MountPointService? = null;
 
     override fun onSessionInitiated(ctx: BindingAwareBroker.ProviderContext?) {
         LOG.info("Kotlin works!")
         mountPointService = ctx!!.getSALService(MountPointService::class.java)
-        val dataBroker = ctx.getSALService(DataBroker::class.java)
-        dataBroker.registerDataTreeChangeListener(DataTreeIdentifier(
-                LogicalDatastoreType.OPERATIONAL,
-                NetconfSampleProvider.NETCONF_TOPO_IID.child(Node::class.java)), this)
-    }
-
-    override fun close() {
-        LOG.info("Kotlin out!")
-    }
-
-    override fun onDataTreeChanged(changes: MutableCollection<DataTreeModification<Node>>) {
-        for (i in changes.iterator()) {
-            LOG.info("Kotlin detected data change: {}", i.rootPath)
-            val mountPoint = mountPointService!!.getMountPoint(i.rootPath.rootIdentifier);
+        ctx.getSALService(DataBroker::class.java).let { dataBroker ->
+            dataBroker.registerDataTreeChangeListener(DataTreeIdentifier(LogicalDatastoreType.OPERATIONAL,
+                    NETCONF_TOPO_IID.child(Node::class.java)), this)
         }
     }
 
+    override fun close() {
+        with(LOG) {
+            info("Kotlin out!")
+            mountPointService = null
+            info("Un-setting mountpoint service")
+        }
+    }
+
+    override fun onDataTreeChanged(changes: MutableCollection<DataTreeModification<Node>>) {
+        // First just log new nodes
+        changes.filter { it.rootNode.modificationType == DataObjectModification.ModificationType.WRITE }
+                .forEach { LOG.info("NETCONF connector ${it.rootNode.dataAfter!!.nodeId} was created") }
+
+        // THen log deleted nodes
+        changes.filter { it.rootNode.modificationType == DataObjectModification.ModificationType.DELETE }
+                .forEach { LOG.info("NETCONF connector ${it.rootNode.dataAfter!!.nodeId} was removed") }
+
+        // TODO process rest
+    }
+
+    override fun toString(): String {
+        return "$javaClass : $this";
+    }
 }
