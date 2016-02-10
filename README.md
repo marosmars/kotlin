@@ -64,7 +64,18 @@ Now kotlin is working as well as ODL NETCONF features.
 
 Now, kotlin can be utilized to [full extent](https://github.com/marosmars/kotlin/commit/e84329e671d7c7c5568ffb53a9ea1fe0a43f404d).
 
+## Adding list-nodes RPC
+
+[Simple RPC called list-nodes]() to allow external and internal apps to list mounted netconf devices.
+It's a copy from [official ODL]() NETCONF sample app](https://wiki.opendaylight.org/view/Controller_Core_Functionality_Tutorials:Tutorials:Netconf_Mount).
+
+After performing build and run the app, list-nodes can be invoked with:
+
+`curl -u "admin:admin" http://localhost:8181/restconf/operations/netconf-odl-sample:list-nodes -X POST`
+
+## Rewrite Module and ModuleFactory to Kotlin
+
 // TODO
 
 ## Unit tests
-*** TODO [Spock](https://code.google.com/archive/p/spock/) tests
+// TODO [Spock](https://code.google.com/archive/p/spock/) tests

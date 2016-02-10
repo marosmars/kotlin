@@ -14,15 +14,18 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier
 import org.slf4j.LoggerFactory
 
 class NetconfSampleProvider : BindingAwareProvider, AutoCloseable, DataTreeChangeListener<Node> {
+    init {
+        LOG.info("Netconf + kotlin sample app initialized")
+    }
 
     companion object {
-        private val LOG = LoggerFactory.getLogger(NetconfSampleProvider::class.java)
+        val LOG = LoggerFactory.getLogger(NetconfSampleProvider::class.java)
         val NETCONF_TOPO_IID: InstanceIdentifier<Topology> = InstanceIdentifier.create(NetworkTopology::class.java)
                 .child(Topology::class.java, TopologyKey(TopologyId(TopologyNetconf.QNAME.localName)));
     }
 
-
     private var mountPointService: MountPointService? = null;
+    private var rpcs: NetconfSampleService? = null;
 
     override fun onSessionInitiated(ctx: BindingAwareBroker.ProviderContext?) {
         LOG.info("Kotlin works!")
@@ -30,6 +33,7 @@ class NetconfSampleProvider : BindingAwareProvider, AutoCloseable, DataTreeChang
         ctx.getSALService(DataBroker::class.java).let { dataBroker ->
             dataBroker.registerDataTreeChangeListener(DataTreeIdentifier(LogicalDatastoreType.OPERATIONAL,
                     NETCONF_TOPO_IID.child(Node::class.java)), this)
+            rpcs = NetconfSampleService(ctx, dataBroker)
         }
     }
 
@@ -38,6 +42,7 @@ class NetconfSampleProvider : BindingAwareProvider, AutoCloseable, DataTreeChang
             info("Kotlin out!")
             mountPointService = null
             info("Un-setting mountpoint service")
+            rpcs?.let { it.close() }
         }
     }
 
@@ -56,4 +61,29 @@ class NetconfSampleProvider : BindingAwareProvider, AutoCloseable, DataTreeChang
     override fun toString(): String {
         return "$javaClass : $this";
     }
+}
+
+/**
+ * Generic extension function to add easy-to-use try-with-resources
+ */
+fun <T, R> T.use(body: (it: T) -> R): R {
+    try {
+        return body.invoke(this)
+    } finally {
+        try {
+            if(this is AutoCloseable) {
+                close();
+            }
+        } catch(e: Exception) {
+            NetconfSampleProvider.LOG.warn("Unable to close resource properly. Ignoring", e)
+        }
+    }
+}
+
+/**
+ * Generic extension function to add easy-to-use init. Much like kotlin's "with"
+ */
+fun <T> T.init(body: T.() -> Unit): T {
+    body.invoke(this)
+    return this;
 }

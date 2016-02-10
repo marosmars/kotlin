@@ -6,4 +6,22 @@ module netconf-odl-sample {
     revision "2015-01-05" {
         description "Initial revision of netconf-odl-sample model";
     }
+
+    rpc list-nodes {
+        description
+          "Returns a list of netconf nodes for each data store space";
+
+        output {
+            leaf-list nc-config-nodes {
+                type string;
+                description
+                  "List of netconf nodes in the config space";
+            }
+            leaf-list nc-oper-nodes {
+                type string;
+                description
+                  "List of netconf nodes in the operational space";
+              }
+        }
+    }
 }
