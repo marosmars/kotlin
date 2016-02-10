@@ -66,8 +66,8 @@ Now, kotlin can be utilized to [full extent](https://github.com/marosmars/kotlin
 
 ## Adding list-nodes RPC
 
-[Simple RPC called list-nodes]() to allow external and internal apps to list mounted netconf devices.
-It's a copy from [official ODL]() NETCONF sample app](https://wiki.opendaylight.org/view/Controller_Core_Functionality_Tutorials:Tutorials:Netconf_Mount).
+[Simple RPC called list-nodes](https://github.com/marosmars/kotlin/commit/9735bfcbb111fa39721752c50ddc4fb3e9c84ee2) to allow external and internal apps to list mounted netconf devices.
+It's a copy from [official ODL NETCONF sample app](https://wiki.opendaylight.org/view/Controller_Core_Functionality_Tutorials:Tutorials:Netconf_Mount).
 
 After performing build and run the app, list-nodes can be invoked with:
 
