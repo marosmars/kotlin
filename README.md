@@ -76,9 +76,5 @@ After performing build and run the app, list-nodes can be invoked with:
 
 `curl -u "admin:admin" http://localhost:8181/restconf/operations/netconf-odl-sample:list-nodes -X POST`
 
-## Rewrite Module and ModuleFactory to Kotlin
-
-// TODO
-
 ## Unit tests
-// TODO [Spock](https://code.google.com/archive/p/spock/) tests
+To make it a bit more interesting, [Spock](http://spockframework.github.io/spock/docs/1.0/index.html) tests are added for the app:
