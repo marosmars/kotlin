@@ -9,6 +9,9 @@ Final app can be found on [github](https://github.com/marosmars/kotlin). Each st
 
 ## Preparations
 
+### Getting familiar with kotlin
+<https://kotlinlang.org/docs/reference/basic-syntax.html>
+
 ### Dependencies
 * Java 8 - Oracle or Openjdk
 * Maven - version 3.2.5 +
